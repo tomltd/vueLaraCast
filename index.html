@@ -8,15 +8,10 @@
 <body>
     <div id="app">
 
-        <form>
-            <span class="error" v-show="!message">
-                You must enter a message
-            </span>
+        <form action="done.html" @submit.prevent="handleIt">
 
-            <textarea v-model="message"></textarea>
-
-            <button type="submit" v-if="message">
-                Send message
+            <button type="submit">
+                Submit Me!
             </button>
 
         </form>
@@ -36,6 +31,11 @@
             el: '#app',
             data: {
                 message: ''
+            },
+            methods: {
+                handleIt: function() {
+                    alert('Handled');
+                }
             }
         });
 
