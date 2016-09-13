@@ -7,15 +7,24 @@
 
 <body>
     <div id="app">
-    <h1>{{ message }}</h1>
 
-    <input v-model="message"></input>
+        <form>
+            <span class="error" v-show="!message">
+                You must enter a message
+            </span>
 
-    <pre>
-        {{ $data | json}}
-    </pre>
+            <textarea v-model="message"></textarea>
+
+            <button type="submit" v-if="message">
+                Send message
+            </button>
+
+        </form>
+        <pre>{{ $data|json}}</pre>
+
 
     </div>
+
 
 
     <script src="https://vuejs.org/js/vue.js"></script>
@@ -26,7 +35,7 @@
         new Vue({
             el: '#app',
             data: {
-                message: 'Hello World'
+                message: ''
             }
         });
 
