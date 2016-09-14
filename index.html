@@ -26,15 +26,22 @@
     </div>
 
     <template id="tasks-template">
-
-        <ul>
+        <h1>My Task
+            <span v-show="remaining">({{ remaining }})</span>
+        </h1>
+        <ul v-show="list.length">
             <li :class="{ 'completed': task.completed }"
                 v-for="task in list"
                 @click="task.completed = ! task.completed;"
             >
                 {{ task.body }}
+                <strong @click="deleteTask(task)">x</strong>
             </li>
         </ul>
+
+        <p v-else>You have no tasks</p>
+
+        <button @click="clearCompleted">Remove Completed</button>
 
     </template>
 
