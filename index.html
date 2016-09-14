@@ -7,10 +7,32 @@
 </head>
 
 <body>
+    <div id="app">
+        <pre>{{ $data | json }}</pre>
 
-    <h1>{{ fullName }}</h1>
-    <input type="text" v-model="first" placeholder="First Name">
-    <input type="text" v-model="last" placeholder="Last Name">
+        <div v-for="plan in plans">
+            <plan :plan="plan" :active.sync="active"></plan>
+
+        </div>
+
+
+
+    </div>
+
+    <template id="plan-template">
+        <div>
+            <span> {{ plan.name }}</span>
+            <span> {{ plan.price }} /month</span>
+            <span></span>
+            <span></span>
+
+            <button @click="setActivePlan">Upgrade</button>
+
+        </div>
+
+    </template>
+
+
 
 
     <script src="https://vuejs.org/js/vue.js"></script>
@@ -19,19 +41,39 @@
 
         // Root vue instance
         new Vue({
-            el: 'body',
+            el: '#app',
 
             data: {
-                first: 'Tom',
-                last: 'Freestone'
+                plans: [
+                    { name: 'Enterprise', price: 300 },
+                    { name: 'Pro', price: 200 },
+                    { name: 'Personal', price: 100 },
+                    { name: 'Free', price: 0 },
+
+                ],
+
+                active: {}
             },
 
-            computed: {
-                fullName: function() {
-                    return this.first + ' ' + this.last;
+
+            components: {
+                plan: {
+                    template: '#plan-template',
+
+                    // This component takes the data object plan
+                    props: ['plan', 'active'],
+
+
+                    methods: {
+                        setActivePlan: function() {
+                            this.active = this.plan;
+                        }
+                    }
+
                 }
-            
+
             }
+
 
         });
 
