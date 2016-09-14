@@ -9,9 +9,9 @@
 <body>
     <div id="app">
 
-        <counter></counter>
-        <counter></counter>
-        <counter></counter>
+        <counter subject="Likes"></counter>
+        <counter subject="Dislikes"></counter>
+
 
 
 
@@ -21,7 +21,7 @@
     </div>
 
     <template id="counter-template">
-        <h1>Heading</h1>
+        <h1>{{ subject }}</h1>
         <button @click="updateCount">{{ count }}</button>
     </template>
 
@@ -30,30 +30,25 @@
     <script>
         // Global Component
         Vue.component('counter', {
-          template: '#counter-template',
+            template: '#counter-template',
 
-          data: function() {
-              return { count: 0 };
-          },
+            // makes the data unique so can be used in multiple instances
+            data: function() {
+                return { count: 0 };
+            },
+            // Tells the template what it can accept
+            props: ['subject'],
 
-          methods: {
-              updateCount: function() {
-                  this.count +=1;
-              }
-          }
+            methods: {
+                updateCount: function() {
+                    this.count +=1;
+                }
+            }
         });
 
         // Root vue instance
         new Vue({
-            el: '#app',
-            // data: {
-            //     count: 0
-            // },
-            // methods: {
-            //     updateCount: function() {
-            //         this.count += 1;
-            //     }
-            // }
+            el: '#app'
         });
 
     </script>
