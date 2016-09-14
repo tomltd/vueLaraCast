@@ -26,7 +26,16 @@
             <span></span>
             <span></span>
 
-            <button @click="setActivePlan">Upgrade</button>
+            <button @click="setActivePlan"
+                    v-show="plan.name !== active.name"
+            >
+                {{ isUpgrade ? 'Upgrade' : 'Downgrade' }}
+
+            </button>
+
+            <span v-else>
+                Current Plan
+            </span>
 
         </div>
 
@@ -62,6 +71,12 @@
 
                     // This component takes the data object plan
                     props: ['plan', 'active'],
+
+                    computed: {
+                        isUpgrade: function () {
+                            return this.plan.price > this.active.price;
+                        }
+                    },
 
 
                     methods: {
