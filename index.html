@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Vue</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
 <body>
     <div id="app">
 
+        <counter></counter>
+        <counter></counter>
+        <counter></counter>
 
-            <button type="submit" @click="updateCount">
-                Increment Counter {{ count }}
-            </button>
 
 
         <pre>{{ $data|json}}</pre>
@@ -19,23 +20,40 @@
 
     </div>
 
-
+    <template id="counter-template">
+        <h1>Heading</h1>
+        <button @click="updateCount">{{ count }}</button>
+    </template>
 
     <script src="https://vuejs.org/js/vue.js"></script>
 
     <script>
+        // Global Component
+        Vue.component('counter', {
+          template: '#counter-template',
 
+          data: function() {
+              return { count: 0 };
+          },
 
+          methods: {
+              updateCount: function() {
+                  this.count +=1;
+              }
+          }
+        });
+
+        // Root vue instance
         new Vue({
             el: '#app',
-            data: {
-                count: 0
-            },
-            methods: {
-                updateCount: function() {
-                    this.count += 1;
-                }
-            }
+            // data: {
+            //     count: 0
+            // },
+            // methods: {
+            //     updateCount: function() {
+            //         this.count += 1;
+            //     }
+            // }
         });
 
     </script>
