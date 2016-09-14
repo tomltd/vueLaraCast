@@ -11,21 +11,32 @@
 </head>
 
 <body>
+
+
+
+
     <div id="app">
         <!--<pre>{{ $data | json }}</pre>-->
+    <my-tasks :list="tasks">
+
+    </my-tasks>
+
+
+
+    </div>
+
+    <template id="tasks-template">
 
         <ul>
             <li :class="{ 'completed': task.completed }"
-            v-for="task in tasks"
-            @click="toggleCompleted(task)"
+                v-for="task in list"
+                @click="task.completed = ! task.completed;"
             >
                 {{ task.body }}
             </li>
         </ul>
 
-
-    </div>
-
+    </template>
 
 
 
@@ -34,10 +45,6 @@
 
     <script>
 
-        new Vue({
-            el: '#app',
-
-        });
 
     </script>
 </body>
